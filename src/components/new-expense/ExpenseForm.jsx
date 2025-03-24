@@ -38,21 +38,21 @@ export const ExpenseForm = ({ onShow, onNewExpense }) => {
     <form onSubmit={handleSubmit}>
       <div className="row">
         <FormInput
-          lableText="Заголовок"
+          labelText="Заголовок"
           id="title"
           inputType="text"
           value={title}
           onChange={handleTitleChange}
         />
         <FormInput
-          lableText="Цена"
+          labelText="Цена"
           id="amount"
           inputType="number"
           value={amount}
           onChange={handleAmountChange}
         />
         <FormInput
-          lableText="Датировать"
+          labelText="Датировать"
           id="date"
           inputType="date"
           value={date}

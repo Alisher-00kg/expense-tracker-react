@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Expenses } from "./components/expenses/Expenses";
 import { NewExpense } from "./components/new-expense/NewExpense";
+import { Login } from "./components/auth/Login";
 
 const DUMMY_EXPENSES = [
   {
@@ -30,6 +31,7 @@ const DUMMY_EXPENSES = [
 ];
 function App() {
   const [expenses, setExpenses] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const getNewExpense = (newObject) => {
     setExpenses((prevExpenses) => {
@@ -37,10 +39,20 @@ function App() {
       return updatedExpenses;
     });
   };
+  const hanldeLoginUser = (aboutUser) => {
+    console.log(aboutUser);
+    setIsLoggedIn(!isLoggedIn);
+  };
   return (
     <div className="root-div">
-      <NewExpense onNewExpense={getNewExpense} />
-      <Expenses array={expenses} />
+      {isLoggedIn ? (
+        <>
+          <NewExpense onNewExpense={getNewExpense} />
+          <Expenses array={expenses} />
+        </>
+      ) : (
+        <Login onLoginUser={hanldeLoginUser} />
+      )}
     </div>
   );
 }
