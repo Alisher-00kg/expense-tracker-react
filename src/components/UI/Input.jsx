@@ -1,7 +1,18 @@
 import React from "react";
 import "./Input.css";
-export const Input = ({ value, type, id, onChange, ...rest }) => {
+import styled from "styled-components";
+export const Input = ({ value, type, id, onChange, placeholder, ...rest }) => {
   return (
-    <input type={type} id={id} onChange={onChange} value={value} {...rest} />
+    <StyledInput
+      type={type}
+      id={id}
+      onChange={onChange}
+      value={value}
+      placeholder={placeholder}
+      {...rest}
+    />
   );
 };
+const StyledInput = styled.input`
+  border: none;
+`;

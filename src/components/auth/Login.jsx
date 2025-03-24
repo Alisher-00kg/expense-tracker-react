@@ -26,32 +26,41 @@ export const Login = ({ onLoginUser }) => {
     onLoginUser({ ...userData });
   };
   return (
-    <WrapperStyled>
-      <h3>Login</h3>
-      <StyledLoginForm onSubmit={handleSubmit}>
-        <StyledFormInput
-          labelText="Email"
-          id="email"
-          inputType="email"
-          placeholder="Enter your email ..."
-          value={emailValue}
-          onChange={(event) => setEmailValue(event.target.value)}
-        />
-        <StyledErrorMessage>{isEmailValid}</StyledErrorMessage>
-        <FormInput
-          labelText="Password"
-          id="password"
-          inputType="password"
-          placeholder="Enter your password ..."
-          value={passwordValue}
-          onChange={(event) => setPasswordValue(event.target.value)}
-        />
-        <StyledErrorMessage>{isPasswordValid}</StyledErrorMessage>
-        <StyledButton type="submit">Login</StyledButton>
-      </StyledLoginForm>
-    </WrapperStyled>
+    <StyledContainer>
+      <WrapperStyled>
+        <h3>Login</h3>
+        <StyledLoginForm onSubmit={handleSubmit}>
+          <StyledFormInput
+            labelText="Email"
+            id="email"
+            inputType="email"
+            placeholder="Enter your email ..."
+            value={emailValue}
+            onChange={(event) => setEmailValue(event.target.value)}
+          />
+          <StyledErrorMessage>{isEmailValid}</StyledErrorMessage>
+          <FormInput
+            labelText="Password"
+            id="password"
+            inputType="password"
+            placeholder="Enter your password ..."
+            value={passwordValue}
+            onChange={(event) => setPasswordValue(event.target.value)}
+          />
+          <StyledErrorMessage>{isPasswordValid}</StyledErrorMessage>
+          <StyledButton type="submit">Login</StyledButton>
+        </StyledLoginForm>
+      </WrapperStyled>
+    </StyledContainer>
   );
 };
+const StyledContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 const WrapperStyled = styled.div`
   width: 500px;
   height: fit-content;
@@ -71,6 +80,11 @@ const StyledLoginForm = styled.form`
   justify-content: center;
   flex-direction: column;
   gap: 15px;
+  input {
+    border: 1.5px solid #c9c9c9;
+    padding: 10px;
+    border-radius: 5px;
+  }
 `;
 const StyledFormInput = styled(FormInput)`
   width: 100%;

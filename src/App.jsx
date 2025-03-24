@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Expenses } from "./components/expenses/Expenses";
 import { NewExpense } from "./components/new-expense/NewExpense";
 import { Login } from "./components/auth/Login";
+import { Header } from "./components/layout/Header";
+import styled from "styled-components";
+import { UsersData } from "./pages/UsersData";
 
 const DUMMY_EXPENSES = [
   {
@@ -32,6 +35,7 @@ const DUMMY_EXPENSES = [
 function App() {
   const [expenses, setExpenses] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isUserPage, setIsUserPage] = useState(false);
 
   const getNewExpense = (newObject) => {
     setExpenses((prevExpenses) => {
@@ -39,22 +43,51 @@ function App() {
       return updatedExpenses;
     });
   };
-  const hanldeLoginUser = (aboutUser) => {
-    console.log(aboutUser);
+  const hanldeLoginUser = () => {
     setIsLoggedIn(!isLoggedIn);
   };
+  const handleToggleUserPage = () => {
+    setIsUserPage(!isUserPage);
+  };
   return (
-    <div className="root-div">
+    <StyledInnerLayout>
       {isLoggedIn ? (
         <>
-          <NewExpense onNewExpense={getNewExpense} />
-          <Expenses array={expenses} />
+          <Header onShow={handleToggleUserPage} active={isUserPage} />
+          <WrapperDiv>
+            {isUserPage ? (
+              <UsersData />
+            ) : (
+              <>
+                <NewExpense onNewExpense={getNewExpense} />
+                <Expenses array={expenses} />
+              </>
+            )}
+          </WrapperDiv>
         </>
       ) : (
         <Login onLoginUser={hanldeLoginUser} />
       )}
-    </div>
+    </StyledInnerLayout>
   );
 }
 
 export default App;
+
+const StyledInnerLayout = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+const WrapperDiv = styled.div`
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding-top: 60px;
+`;
